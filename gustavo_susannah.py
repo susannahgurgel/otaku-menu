@@ -112,9 +112,10 @@ class Anime(X):
         return temp / 12
 
 class Usuario(ABC):
-    nome = None
-    email = None
-    senha = None
+    def __init__(self, nome, email, senha):
+        self.nome = nome
+        self.email = email
+        self.senha = senha
 
     def get_nome(self):
         return self.nome
@@ -136,9 +137,7 @@ class Usuario(ABC):
 
 class Admnistrador(Usuario):
     def __init__(self, nome, email, senha, cargo, nivelPrivilegio):
-        self.nome = nome
-        self.email = email
-        self.senha = senha
+        super().__init__(nome, email, senha)
         self.cargo = cargo
         self.nivelPrivilegio = nivelPrivilegio
 
@@ -155,8 +154,6 @@ class Admnistrador(Usuario):
         self.nivelPrivilegio = nivelPrivilegio
 
     def compara_senha(self, senhaDigitada):
-        print(self.senha)
-        print(senhaDigitada)
         if senhaDigitada == self.senha:
             return True
         else:
@@ -164,9 +161,7 @@ class Admnistrador(Usuario):
 
 class Cliente(Usuario):
     def __init__(self, nome, email, senha, idade, nomeUsuario):
-        self.nome = nome
-        self.email = email
-        self.senha = senha
+        super().__init__(nome, email, senha)
         self.idade = idade
         self.nomeUsuario = nomeUsuario
         self.favoritos = []
